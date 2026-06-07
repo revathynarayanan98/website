@@ -1,569 +1,1069 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
-<link href="images/favicon.png" rel="icon" />
-<title>Revathy Personal Portfolio</title>
-<meta name="description" content="Simone is responsive bootstrap 4 one page personal portfolio html template.">
-<meta name="author" content="harnishdesign.net">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revathy Narayanan — Android Lead &amp; Security Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090f;
+      --bg-2: #0d0d18;
+      --bg-card: #111120;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
 
-<!-- Web Fonts -->
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-<!-- Stylesheet
-============================== -->
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
-<!-- Font Awesome Icon -->
-<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css" />
-<!-- Owl Carousel -->
-<link rel="stylesheet" type="text/css" href="vendor/owl.carousel/assets/owl.carousel.min.css" />
-<!-- Magnific Popup -->
-<link rel="stylesheet" type="text/css" href="vendor/magnific-popup/magnific-popup.min.css" />
-<!-- Custom Stylesheet -->
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(9,9,15,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #a78bfa, #06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 0.45rem 1.1rem !important;
+      border: 1px solid rgba(124,58,237,0.5) !important;
+      border-radius: 6px !important;
+      color: #a78bfa !important;
+      transition: all 0.2s !important;
+    }
+    .nav-cta:hover { background: rgba(124,58,237,0.1) !important; color: white !important; }
+
+    .nav-hamburger { display: none; cursor: pointer; color: var(--text-muted); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% -10%, rgba(124,58,237,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 85% 60%, rgba(6,182,212,0.07) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, transparent 80%);
+    }
+
+    .hero-content { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem; font-weight: 500; color: #a78bfa;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-badge-dot {
+      width: 7px; height: 7px; background: #06b6d4;
+      border-radius: 50%; animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity:1; } 50% { opacity:0.3; }
+    }
+
+    h1 {
+      font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+      font-weight: 900; line-height: 1.08;
+      letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    }
+
+    .hero-name { display: block; color: var(--text); }
+
+    .hero-title {
+      display: block;
+      background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 60%, #34d399 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-size: 200%; animation: shimmer 6s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-desc {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 530px; margin-bottom: 2.5rem; line-height: 1.75;
+    }
+
+    .hero-actions { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2.75rem; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      color: white; text-decoration: none; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 0 28px rgba(124,58,237,0.35);
+      transition: all 0.25s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 44px rgba(124,58,237,0.55); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border: 1px solid var(--border); color: var(--text-muted);
+      text-decoration: none; border-radius: 8px;
+      font-weight: 500; font-size: 0.9rem;
+      background: rgba(255,255,255,0.025);
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: rgba(124,58,237,0.5); color: var(--text); background: rgba(124,58,237,0.04); }
+
+    .hero-socials { display: flex; gap: 0.75rem; }
+    .hero-socials a {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .hero-socials a:hover { border-color: var(--accent); color: #a78bfa; background: rgba(124,58,237,0.06); }
+
+    .hero-stats {
+      display: flex; gap: 3rem;
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-size: 2rem; font-weight: 900; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #a78bfa, #06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.15rem; }
+
+    /* ── SHARED SECTION STYLES ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 980px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 18px; height: 2px; background: var(--accent);
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted); font-size: 0.95rem;
+      max-width: 500px; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg-2); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: start;
+    }
+
+    .about-text p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; font-size: 0.95rem; }
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    .about-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; margin-top: 1.75rem;
+    }
+
+    .meta-item {}
+    .meta-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+    .meta-value { font-size: 0.875rem; color: var(--text); font-weight: 500; margin-top: 0.15rem; }
+
+    .highlight-stack { display: flex; flex-direction: column; gap: 1rem; }
+
+    .hcard {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      display: flex; gap: 0.875rem; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .hcard:hover { border-color: rgba(124,58,237,0.35); }
+
+    .hcard-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: rgba(124,58,237,0.1); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+
+    .hcard-title { font-size: 0.875rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .hcard-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+
+    .timeline { position: relative; padding-left: 1.75rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--accent), var(--border));
+    }
+
+    .titem {
+      position: relative; margin-bottom: 3rem;
+      opacity: 0; transform: translateY(18px); transition: all 0.55s ease;
+    }
+    .titem.visible { opacity: 1; transform: translateY(0); }
+
+    .tdot {
+      position: absolute; left: -2.2rem; top: 4px;
+      width: 11px; height: 11px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 10px rgba(124,58,237,0.6);
+    }
+    .tdot.live { background: #06b6d4; box-shadow: 0 0 14px rgba(6,182,212,0.7); }
+
+    .exp-role { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .exp-co { font-size: 0.875rem; color: var(--accent); font-weight: 600; }
+    .exp-meta {
+      display: flex; gap: 0.75rem; align-items: center;
+      margin: 0.3rem 0 0.75rem;
+      font-size: 0.78rem; color: var(--text-dim);
+    }
+
+    .live-badge {
+      background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+      color: #06b6d4; padding: 0.12rem 0.5rem; border-radius: 100px;
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    }
+
+    .exp-list { list-style: none; }
+    .exp-list li {
+      font-size: 0.86rem; color: var(--text-muted); padding: 0.28rem 0;
+      padding-left: 1.1rem; position: relative; line-height: 1.65;
+    }
+    .exp-list li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.7rem; top: 0.35rem;
+    }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
+
+    .stag {
+      background: rgba(124,58,237,0.07); border: 1px solid rgba(124,58,237,0.18);
+      color: #a78bfa; padding: 0.18rem 0.55rem;
+      border-radius: 4px; font-size: 0.72rem; font-family: var(--mono);
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg-2); }
+
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.25rem;
+    }
+
+    .scat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+      opacity: 0; transform: translateY(18px); transition: all 0.5s ease;
+    }
+    .scat.visible { opacity: 1; transform: translateY(0); }
+    .scat:hover { border-color: rgba(124,58,237,0.28); }
+
+    .scat-title {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-dim);
+      margin-bottom: 0.875rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .scat-title svg { color: var(--accent); }
+
+    .stags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+    .sk {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.28rem 0.65rem;
+      border-radius: 6px; font-size: 0.78rem; cursor: default;
+      transition: all 0.2s;
+    }
+    .sk:hover {
+      background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.3);
+      color: var(--text);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); }
+
+    .proj-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem;
+    }
+
+    .pcard {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.875rem;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(18px); transition: all 0.55s ease;
+    }
+    .pcard.visible { opacity: 1; transform: translateY(0); }
+    .pcard::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #7c3aed, #06b6d4, #34d399);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .pcard:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-4px); }
+    .pcard:hover::before { opacity: 1; }
+
+    .pcard-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .pcard-icon { font-size: 1.75rem; }
+
+    .pcard-link {
+      width: 32px; height: 32px; border: 1px solid var(--border);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); text-decoration: none; transition: all 0.2s;
+    }
+    .pcard-link:hover { border-color: var(--accent); color: #a78bfa; }
+
+    .pcard-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .pcard-lab { font-size: 0.78rem; color: var(--accent-2); font-weight: 500; margin-bottom: 0.7rem; }
+    .pcard-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.1rem; }
+
+    .ptags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .ptag {
+      background: rgba(6,182,212,0.07); border: 1px solid rgba(6,182,212,0.2);
+      color: #67e8f9; padding: 0.18rem 0.55rem; border-radius: 4px;
+      font-size: 0.72rem; font-family: var(--mono);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg-2); }
+
+    .edu-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .ecard {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.75rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+      opacity: 0; transform: translateX(-18px); transition: all 0.5s ease;
+    }
+    .ecard.visible { opacity: 1; transform: translateX(0); }
+    .ecard:hover { border-color: rgba(124,58,237,0.28); }
+
+    .edu-deg { font-size: 0.975rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .edu-school { font-size: 0.875rem; color: var(--accent); font-weight: 500; }
+    .edu-loc { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.15rem; }
+    .edu-yr { font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted); white-space: nowrap; }
+
+    /* ── INVOLVEMENT ── */
+    #involvement { background: var(--bg); }
+
+    .inv-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.75rem 2rem;
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      max-width: 680px; transition: border-color 0.2s;
+    }
+    .inv-card:hover { border-color: rgba(124,58,237,0.28); }
+
+    .inv-ico {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(124,58,237,0.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+
+    .inv-title { font-weight: 700; font-size: 0.975rem; margin-bottom: 0.2rem; }
+    .inv-sub { font-size: 0.78rem; color: var(--accent-2); font-weight: 500; margin-bottom: 0.5rem; }
+    .inv-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg-2); }
+
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+
+    .cinfo { display: flex; flex-direction: column; gap: 0.875rem; }
+
+    .citem {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.875rem 1.2rem;
+      text-decoration: none; color: var(--text); transition: all 0.2s;
+    }
+    .citem:hover { border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.04); }
+
+    .cico {
+      width: 34px; height: 34px; flex-shrink: 0;
+      background: rgba(124,58,237,0.1); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+
+    .clabel { font-size: 0.7rem; color: var(--text-dim); }
+    .cval { font-size: 0.875rem; font-weight: 500; }
+
+    .socials { display: flex; gap: 0.625rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .slink {
+      display: flex; align-items: center; gap: 0.45rem;
+      padding: 0.55rem 0.875rem; border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text-muted); text-decoration: none;
+      font-size: 0.82rem; transition: all 0.2s;
+    }
+    .slink:hover { border-color: rgba(124,58,237,0.4); color: var(--text); }
+
+    .ccta { }
+    .ccta p {
+      color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 1.75rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: var(--text-dim);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { color: #a78bfa; }
+
+    /* ── ANIMATIONS BASE ── */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: all 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+
+      section { padding: 4rem 1.25rem; }
+      #home { padding: 5.5rem 1.25rem 3.5rem; }
+
+      .about-grid,
+      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .ecard { flex-direction: column; gap: 0.35rem; align-items: flex-start; }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { justify-content: center; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="side-header" data-spy="scroll" data-target=".navbar" data-offset="1">
-
-<!-- Preloader -->
-<div class="preloader preloader-dark">
-  <div class="lds-ellipsis">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">RN</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
   </div>
-</div>
-<!-- Preloader End --> 
+</nav>
 
-<!-- Document Wrapper   
-=============================== -->
-<div id="main-wrapper"> 
-  <!-- Header
-  ============================ -->
-  <header id="header" class="sticky-top"> 
-    <!-- Navbar -->
-    <nav class="primary-menu navbar navbar-expand-lg bg-dark navbar-text-light border-bottom-0">
-      <div class="container-fluid position-relative h-100 flex-lg-column pl-3 px-lg-3 pt-lg-3 pb-lg-2"> 
-        
-        <!-- Logo --> 
-        <a href="index.html" class="mb-lg-auto mt-lg-4">
-			<span class="bg-dark-2 rounded-pill p-2 mb-lg-1 d-none d-lg-inline-block">
-				<img class="img-fluid rounded-pill d-block" src="images/revathy_chicago.jpeg" title="I'm Simone" alt="">
-			</span>
-			<h1 class="text-5 text-white text-center mb-0 d-lg-block">Revathy Narayanan</h1>
-        </a> 
-        <!-- Logo End -->
-        
-        <div id="header-nav" class="collapse navbar-collapse w-100 my-lg-auto">
-          <ul class="navbar-nav text-lg-center my-lg-auto py-lg-3">
-            <li class="nav-item"><a class="nav-link smooth-scroll active" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" 	href="#about">About Me</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#services">My Expertise</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#resume">Education</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Projects</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <ul class="social-icons social-icons-muted social-icons-sm mt-lg-auto ml-auto ml-lg-0 mb-n1 d-flex">
-          <li class="social-icons-facebook"><a data-toggle="tooltip" href="http://www.facebook.com/" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="social-icons-twitter"><a data-toggle="tooltip" href="https://www.instagram.com/revathy.nn/" target="_blank" title="" data-original-title="Instagram"><i class="fab fa-instagram"></i></a></li>
-          <li class="social-icons-dribbble"><a data-toggle="tooltip" href="https://www.linkedin.com/in/revathynarayanan/" target="_blank" title="" data-original-title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-          <li class="social-icons-github"><a data-toggle="tooltip" href="https://github.com/revathynarayanan98" target="_blank" title="" data-original-title="GitHub"><i class="fab fa-github"></i></a></li>
-        </ul>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-nav"><span></span><span></span><span></span></button>
-      </div>
-    </nav>
-    <!-- Navbar End --> 
-  </header>
-  <!-- Header End --> 
-  
-  <!-- Content
-  ============================================= -->
-  <div id="content" role="main"> 
-    
-    <!-- Intro
-    ============================================= -->
-    <section id="home">
-      <div class="hero-wrap">
-        <div class="hero-mask opacity-8 bg-dark"></div>
-        <div class="hero-bg parallax" style="background-image:url('images/intro-bg.jpg');"></div>
-        <div class="hero-content section d-flex fullscreen">
-          <div class="container my-auto">
-            <div class="row">
-              <div class="col-12 text-center">
-                <div class="typed-strings">
-                  <p>I'm Revathy Narayanan</p>
-                  <p>I'm a Mobile Application Developer.</p>
-                  <p>I'm a Web Developer.</p>
-                  <p>I'm an Artist.</p>
-                </div>
-                <p class="text-7 font-weight-500 text-white mb-2 mb-md-3">Welcome</p>
-                <h2 class="text-16 font-weight-600 text-white mb-2 mb-md-3"><span class="typed"></span></h2>
-                <p class="text-5 text-light mb-4">based in New York.</p>
-				<a href="#about" class="btn btn-outline-primary rounded-pill shadow-none smooth-scroll mt-2">About Me</a>
-              </div>
-            </div>
-          </div>
-          <a href="#about" class="scroll-down-arrow text-white smooth-scroll"><span class="animated"><i class="fa fa-chevron-down"></i></span></a> </div>
-      </div>
-    </section>
-    <!-- Intro end --> 
-    
-    <!-- About
-    ============================================= -->
-    <section id="about" class="section bg-dark-1">
-      <div class="container px-lg-5"> 
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-          <h2 class="text-24 text-muted opacity-1 text-uppercase font-weight-600 w-100 mb-0">About Me</h2>
-          <p class="text-9 text-white font-weight-600 position-absolute w-100 align-self-center line-height-4 mb-0">Know Me More<span class="heading-separator-line border-bottom border-3 border-primary position-abolute d-block mx-auto"></span> </p>
-        </div>
-        <!-- Heading end-->
-        
-        <div class="row">
-          <div class="col-lg-8 text-center text-lg-left">
-            <h2 class="text-7 text-white font-weight-600 mb-3">I'm <span class="text-primary">Revathy Narayanan,</span> a technology enthusiast</h2>
-            <p class="text-white-50">I absolutely love typing code and making things happen! I am experienced in Mobile application development, web development, machine learning, cloud computing and distributed systems.</p>
-          </div>
-          <div class="col-lg-4 mt-5 mt-lg-0">
-            <div class="pl-4">
-              <ul class="list-style-2 list-style-light text-light">
-                <li><span class="font-weight-600 mr-2"><a href="https://www.linkedin.com/in/revathynarayanan/">My Linkedin</a></span></li>
-                <li><span class="font-weight-600 mr-2"><a href="https://github.com/revathynarayanan98">My Github</a></span></li>
-                <li><span class="font-weight-600 mr-2">Email:</span><a href="mailto:nrevathy1998@gmail.com">revathynarayanan98@gmail.com</a></li>
-                <li class="border-0"><span class="font-weight-600 mr-2">From:</span>Buffalo, New York</li>
-              </ul>
-              <a href="images/RevathyN_Resume.pdf" class="btn btn-primary" download><span><i class="fa fa-download"></i>download my Resume</span></a>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
 
-          </div>
-        </div>
-        <div class="brands-grid separator-border separator-border-light mt-5">
-          <div class="row">
-            <div class="col-6 col-md-3">
-              <div class="featured-box text-center">
-                <h4 class="text-12 text-white-50 mb-0"><span class="counter" data-from="0" data-to="1">1</span></h4>
-                <p class="text-light mb-0">Scopus-Indexed Research Paper</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="featured-box text-center">
-                <h4 class="text-12 text-white-50 mb-0"><span class="counter" data-from="0" data-to="23">23</span></h4>
-                <p class="text-light mb-0">Projects</p>
-              </div>
-            </div>
-            <!--
-            <div class="col-6 col-md-3">
-              <div class="featured-box text-center">
-                <h4 class="text-12 text-white-50 mb-0"><span class="counter" data-from="0" data-to="650">650</span>+</h4>
-                <p class="text-light mb-0">Projects Done</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="featured-box text-center">
-                <h4 class="text-12 text-white-50 mb-0"><span class="counter" data-from="0" data-to="38">20</span></h4>
-                <p class="text-light mb-0">Get Awards</p>
-              </div>
-            </div>
-          -->
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- About end --> 
-    
-    <!-- Services
-    ============================================= -->
-    <section id="services" class="section bg-dark-2">
-      <div class="container px-lg-5"> 
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-          <h2 class="text-24 text-muted opacity-1 text-uppercase font-weight-600 w-100 mb-0">Services</h2>
-          <p class="text-9 text-white font-weight-600 position-absolute w-100 align-self-center line-height-4 mb-0">What I Do?<span class="heading-separator-line border-bottom border-3 border-primary position-abolute d-block mx-auto"></span> </p>
-        </div>
-        <!-- Heading end-->
-        
-        <div class="row">
-          <div class="col-lg-11 mx-auto">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-5">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-palette"></i> </div>
-                  <h3 class="text-white">UI/UX Design</h3>
-                  <p class="text-white-50 mb-0">Adobe Illustrator</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-5">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-desktop"></i></div>
-                  <h3 class="text-white">Web Design</h3>
-                  <p class="text-white-50 mb-0">Javascript, HTML5, CSS3, PHP, AJAX, Laravel, MVC Archeitecture</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-5">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-pencil-ruler"></i> </div>
-                  <h3 class="text-white">Machine Learning</h3>
-                  <p class="text-white-50 mb-0">Sci-kit.</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-5">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-paint-brush"></i> </div>
-                  <h3 class="text-white">App Design &amp; Develop</h3>
-                  <p class="text-white-50 mb-0">Android, iOS, Swift</p>
-                </div>
-              </div>
-              <!--
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-5 mb-md-0">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-chart-area"></i> </div>
-                  <h3 class="text-white">Business Analysis</h3>
-                  <p class="text-white-50 mb-0">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="featured-box style-3 mb-0">
-                  <div class="featured-box-icon text-primary bg-dark-1 shadow-sm rounded"> <i class="fas fa-bullhorn"></i> </div>
-                  <h3 class="text-white">SEO Marketing</h3>
-                  <p class="text-white-50 mb-0">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</p>
-                </div>
-              </div>
-            -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Services end --> 
-    
-    <!-- Resume
-    ============================================= -->
-    <section id="resume" class="section bg-dark-1">
-      <div class="container px-lg-5"> 
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-          <h2 class="text-24 text-muted opacity-1 text-uppercase font-weight-600 w-100 mb-0">Summary</h2>
-          <p class="text-9 text-white font-weight-600 position-absolute w-100 align-self-center line-height-4 mb-0">Education<span class="heading-separator-line border-bottom border-3 border-primary position-abolute d-block mx-auto"></span> </p>
-        </div>
-        <!-- Heading end-->
-        
-        <div class="row"> 
-          <!-- My Education -->
-          <div class="col-md-6">
-            <h2 class="text-6 text-white font-weight-600 mb-4">My Education</h2>
-            <div class="border border-dark rounded p-4 mb-4">
-              <p class="badge badge-danger text-2 font-weight-400">Jan 2020 - May 2021</p>
-              <h3 class="text-5 text-white">M.S in Computer Science</h3>
-              <p class="text-primary">University in Buffalo, New York</p>
-            </div>
-            <div class="border border-dark rounded p-4 mb-4">
-              <p class="badge badge-danger text-2 font-weight-400">2015 - 2019</p>
-              <h3 class="text-5 text-white">B.Tech in Computer Science</h3>
-              <p class="text-primary">Amrita Vishwa Vidyapeetham, India</p>
-            </div>
-          </div>
-          
-          <!-- My Experience -->
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Android Implementation Lead &nbsp;·&nbsp; PNC Bank, Pittsburgh
+    </div>
 
-        </div>
-        <!-- My Skills -->
-		<h2 class="text-6 text-white font-weight-600 mt-4 mb-4">My Skills</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <p class="text-light font-weight-500 text-left mb-2">Web Design <span class="float-right">65%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <p class="text-light font-weight-500 text-left mb-2">HTML/CSS <span class="float-right">95%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <p class="text-light font-weight-500 text-left mb-2">JavaScript <span class="float-right">80%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <p class="text-light font-weight-500 text-left mb-2">Java <span class="float-right">70%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <p class="text-light font-weight-500 text-left mb-2">Python <span class="float-right">60%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <p class="text-light font-weight-500 text-left mb-2">C++ <span class="float-right">60%</span></p>
-            <div class="progress progress-sm bg-dark-2 mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-5"><a href="images/RevathyN_Resume.pdf" class="btn btn-primary" download><span><i class="fa fa-download"></i>download my Resume</span></a></div>
+    <h1>
+      <span class="hero-name">Revathy Narayanan</span>
+      <span class="hero-title">Android Lead &amp; Security Engineer</span>
+    </h1>
+
+    <p class="hero-desc">
+      Building secure, high-scale mobile experiences for millions of banking users.
+      Specializing in Android development, authentication systems, and cloud-native infrastructure.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#experience" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        View My Work
+      </a>
+      <a href="mailto:revathyn1998@gmail.com" class="btn-outline">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Say Hello
+      </a>
+    </div>
+
+    <div class="hero-socials">
+      <a href="https://www.linkedin.com/in/revathynarayanan/" target="_blank" title="LinkedIn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/revathynarayanan98" target="_blank" title="GitHub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://www.instagram.com/revathy.nn/" target="_blank" title="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5M+</div>
+        <div class="stat-label">Banking app users</div>
       </div>
-    </section>
-    <!-- Resume end --> 
-    
-    <!-- Portfolio
-    ============================================= -->
-    <section id="portfolio" class="section bg-dark-2">
-      <div class="container px-lg-5"> 
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-          <h2 class="text-24 text-muted opacity-1 text-uppercase font-weight-600 w-100 mb-0">Portfolio</h2>
-          <p class="text-9 text-white font-weight-600 position-absolute w-100 align-self-center line-height-4 mb-0">My Projects<span class="heading-separator-line border-bottom border-3 border-primary position-abolute d-block mx-auto"></span> </p>
-        </div>
-        <!-- Heading end--> 
-        
-        <!-- Filter Menu -->
-        <ul class="portfolio-menu nav nav-tabs nav-light justify-content-center border-bottom-0 mb-4">
-          <li class="nav-item"> <a data-filter="*" class="nav-link active" href="">All</a></li>
-          <li class="nav-item"> <a data-filter=".design" href="" class="nav-link">Projects</a></li>
-          <li class="nav-item"> <a data-filter=".brand" href="" class="nav-link">Art</a></li>
-          <li class="nav-item"> <a data-filter=".photos" href="" class="nav-link">Photos</a></li>
-        </ul>
-        <!-- Filter Menu end -->
-        <div class="portfolio popup-ajax-gallery">
-          <div class="row portfolio-filter">
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/budget_system_analysis_1.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Machine Learning</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/aakhyaan.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1-2.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Email Application</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/multicast_messenger.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1-3.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Android</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/Proximity Marketing.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1-4.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Machine Learning</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/railway_reservation_system.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1-5.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Web & Mobile App</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 brand">
-              <div class="portfolio-box rounded my-3">
-                <div class="portfolio-img rounded"> <img class="img-fluid d-block" src="project_img/smart_dining.png" alt="">
-                  <div class="portfolio-overlay"> <a class="popup-ajax stretched-link" href="ajax/portfolio-ajax-project-dark-1-6.html"></a>
-                    <div class="portfolio-overlay-details">
-                      <h5 class="text-white font-weight-400">Android Application</h5>
-                      <span class="text-light"></span> </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Years at PNC Bank</div>
       </div>
-    </section>
-    <!-- Portfolio end --> 
-    
-    
-    <!-- Contact Me
-    ============================================= -->
-    <section id="contact" class="section bg-dark-2">
-      <div class="container px-5"> 
-        <!-- Heading -->
-        <div class="position-relative d-flex text-center mb-5">
-          <h2 class="text-24 text-muted opacity-1 text-uppercase font-weight-600 w-100 mb-0">Contact</h2>
-          <p class="text-9 text-white font-weight-600 position-absolute w-100 align-self-center line-height-4 mb-0">Get in Touch<span class="heading-separator-line border-bottom border-3 border-primary position-abolute d-block mx-auto"></span> </p>
-        </div>
-        <!-- Heading end-->
-        <div class="row">
-          <div class="col-md-4 col-xl-3 order-1 order-md-0 text-center text-md-left mt-5 mt-md-0">
-            <p class="text-3 text-white-50 mb-1"><span class="text-primary text-4 mr-2"><i class="fas fa-phone"></i></span>(716)-218-6142</p>
-            <p class="text-3 text-white-50 mb-4"><span class="text-primary text-4 mr-2"><i class="fas fa-envelope"></i></span>nrevathy1998@gmail.com</p>
-            <h2 class="mb-3 text-5 text-white text-uppercase">Follow Me</h2>
-            <ul class="social-icons social-icons-muted ml-md-n2 justify-content-center justify-content-md-start">
-              <li class="social-icons-dribbble"><a data-toggle="tooltip" href="http://www.dribbble.com/harnishdesign/" target="_blank" title="" data-original-title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
-              <li class="social-icons-twitter"><a data-toggle="tooltip" href="https://twitter.com/harnishdesign/" target="_blank" title="" data-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
-              <li class="social-icons-facebook"><a data-toggle="tooltip" href="http://www.facebook.com/harnishdesign/" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-              <li class="social-icons-google"><a data-toggle="tooltip" href="http://www.google.com/" target="_blank" title="" data-original-title="Google"><i class="fab fa-google"></i></a></li>
-              <li class="social-icons-github"><a data-toggle="tooltip" href="http://www.github.com/" target="_blank" title="" data-original-title="GitHub"><i class="fab fa-github"></i></a></li>
-            </ul>
-          </div>
-          <div class="col-md-8 col-xl-9 order-0 order-md-1">
-            <h2 class="mb-3 text-5 text-white text-uppercase text-center text-md-left">Get in touch with me</h2>
-			<form id="contact-form" class="form-dark" action="php/mail.php" method="post">
-              <div class="row">
-                <div class="col-xl-6">
-                  <div class="form-group">
-                    <input name="name" type="text" class="form-control" required placeholder="Name">
-                  </div>
-                </div>
-                <div class="col-xl-6">
-                  <div class="form-group">
-                    <input name="email" type="email" class="form-control" required placeholder="Email">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <textarea name="form-message" class="form-control" rows="5" required placeholder="Tell us more about your needs........"></textarea>
-              </div>
-              <p class="text-center mt-4 mb-0">
-				<button id="submit-btn" class="btn btn-primary rounded-pill d-inline-flex" type="submit">Send Message</button>
-              </p>
-            </form>
-          </div>
-        </div>
-		
+      <div>
+        <div class="stat-num">92%</div>
+        <div class="stat-label">ML model accuracy</div>
       </div>
-    </section>
-    <!-- Contact Me end --> 
-    
+      <div>
+        <div class="stat-num">15%</div>
+        <div class="stat-label">Reduced auth issues</div>
+      </div>
+    </div>
+
   </div>
-  <!-- Content end --> 
-  
-  <!-- Footer
-  ============================================= -->
-  <footer id="footer" class="section footer-text-light bg-dark-1">
-    <div class="container px-lg-5">
-      <div class="row">
-        <div class="col-lg-6 text-center text-lg-left">
-          <p class="mb-3 mb-lg-0">Copyright © 2020 <a href="#">RevathyNarayanan</a>. All Rights Reserved.</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About Me</div>
+    <h2>Passionate about building things<br>people rely on every day</h2>
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>
+          I'm a <strong>Software Engineer and Android Lead</strong> based in Harrison, New Jersey,
+          currently embedded with PNC Bank via Virtusa Corporation. I specialize in
+          <strong>Android development</strong>, mobile authentication, and cloud-native architecture.
+        </p>
+        <p>
+          Over the past 4+ years, I've been at the core of the <strong>PNC Mobile Banking app</strong> —
+          used by over 5 million people — owning authentication flows, session management, and critical
+          user journeys end-to-end. I care deeply about security, accessibility, and writing code that lasts.
+        </p>
+        <p>
+          I hold an <strong>M.S. in Computer Science</strong> from the University at Buffalo and started
+          my research journey building ML models with 92% accuracy for medical diagnosis. Outside work,
+          I'm a proud member of <strong>AnitaB.org</strong> and a Grace Hopper Celebration attendee.
+        </p>
+        <div class="about-meta">
+          <div class="meta-item">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Harrison, New Jersey</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Current Role</span>
+            <span class="meta-value">Android Lead @ PNC Bank</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Email</span>
+            <span class="meta-value">revathyn1998@gmail.com</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Degree</span>
+            <span class="meta-value">M.S. Computer Science</span>
+          </div>
         </div>
-        <div class="col-lg-6">
-          <ul class="nav nav-separator nav-separator-light justify-content-center justify-content-lg-end">
-            <li class="nav-item"> <a class="nav-link" data-toggle="modal" data-target="#terms-policy" href="#">Terms & Policy</a></li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="modal" data-target="#disclaimer" href="#">Disclaimer</a></li>
-          </ul>
+      </div>
+      <div class="highlight-stack fade-up" style="transition-delay:0.1s">
+        <div class="hcard">
+          <div class="hcard-icon">📱</div>
+          <div>
+            <div class="hcard-title">Mobile-First Engineering</div>
+            <div class="hcard-desc">Deep expertise in Android (Kotlin/Java), Jetpack Compose, MVVM, and the full mobile development lifecycle from prototype to production.</div>
+          </div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">🔐</div>
+          <div>
+            <div class="hcard-title">Security &amp; Authentication</div>
+            <div class="hcard-desc">Leading authentication initiatives — biometric flows, session management, and Transmit SDK integrations powering secure banking experiences.</div>
+          </div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">☁️</div>
+          <div>
+            <div class="hcard-title">Cloud &amp; DevOps</div>
+            <div class="hcard-desc">CI/CD pipelines with Jenkins and Fastlane, containerization with Docker and Kubernetes, infrastructure on AWS and OpenShift.</div>
+          </div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-icon">♿</div>
+          <div>
+            <div class="hcard-title">Accessibility</div>
+            <div class="hcard-desc">Built TalkBack support and accessibility standards compliance — ensuring the app is usable by everyone, regardless of ability.</div>
+          </div>
         </div>
       </div>
     </div>
-  </footer>
-  <!-- Footer end --> 
-  
-</div>
-<!-- Document Wrapper end --> 
-
-<!-- Back to Top
-============================================= --> 
-<a id="back-to-top" class="rounded-circle" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
-
-<!-- Terms & Policy Modal
-================================== -->
-<div id="terms-policy" class="modal fade" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content bg-dark-2 text-light">
-      <div class="modal-header border-secondary">
-        <h5 class="modal-title text-white">Terms & Policy</h5>
-        <button type="button" class="close font-weight-400 text-white" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-      </div>
-      <div class="modal-body p-4">
-        <p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-        <h3 class="text-white mb-3 mt-4 mt-4">Terms of Use</h3>
-        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Simply dummy text of the printing and typesetting industry.</p>
-        <h5 class="text-white text-4 mt-4">Part I – Information simone collects and controls</h5>
-        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        <h5 class="text-white text-4 mt-4">Part II – Information that simone processes on your behalf</h5>
-        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        <h5 class="text-white text-4 mt-4">Part III – General</h5>
-        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        <h3 class="text-white mb-3 mt-4">Privacy Policy</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-        <ol class="line-height-5">
-          <li>Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Quidam lisque persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>In quot quidam persequeris vim, ad mea essent possim iriure. Quidam lisque persius interesset his et.</li>
-          <li>Quidam lisque persius interesset his et, Lisque persius interesset his et.</li>
-          <li>Interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Quot quidam persequeris vim Quidam lisque persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-        </ol>
-      </div>
-    </div>
   </div>
-</div>
-<!-- Terms & Policy Modal End --> 
+</section>
 
-<!-- Disclaimer Modal
-================================== -->
-<div id="disclaimer" class="modal fade" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content bg-dark-2 text-light">
-      <div class="modal-header border-secondary">
-        <h5 class="modal-title text-white">Copyright & Disclaimer</h5>
-        <button type="button" class="close font-weight-400 text-white" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-      </div>
-      <div class="modal-body p-4">
-        <p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-        <ul class="line-height-5">
-          <li>Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Quidam lisque persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>In quot quidam persequeris vim, ad mea essent possim iriure. Quidam lisque persius interesset his et.</li>
-          <li>Quidam lisque persius interesset his et, Lisque persius interesset his et.</li>
-          <li>Interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
-          <li>Quot quidam persequeris vim Quidam lisque persius interesset his et, Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure.</li>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2>Where I've worked</h2>
+    <p class="section-sub">My professional journey in software engineering and mobile development.</p>
+
+    <div class="timeline">
+
+      <!-- Role 1 -->
+      <div class="titem">
+        <div class="tdot live"></div>
+        <div class="exp-role">Android Implementation Lead – Authentication &amp; Security</div>
+        <div class="exp-co">Virtusa Corporation &nbsp;·&nbsp; PNC Bank</div>
+        <div class="exp-meta">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Sep 2024 – Present &nbsp;·&nbsp; Pittsburgh
+          <span class="live-badge">Current</span>
+        </div>
+        <ul class="exp-list">
+          <li>Spearheading authentication initiatives — secure login, biometric, and session management — across millions of banking users.</li>
+          <li>Designed and integrated advanced mobile authentication flows using <strong>Transmit SDK</strong>, enhancing security and UX across user journeys.</li>
+          <li>Implemented CI/CD pipelines (Jenkins, Fastlane) and full infrastructure setup supporting the initiative from dev to deployment.</li>
+          <li>Led front-end and back-end development across authentication and security domains, collaborating closely with security architects.</li>
+          <li>Conducted regular code reviews; mentored engineers in secure coding practices, MVVM patterns, and testing strategies.</li>
         </ul>
+        <div class="tag-row">
+          <span class="stag">Kotlin</span>
+          <span class="stag">Java</span>
+          <span class="stag">Jetpack Compose</span>
+          <span class="stag">Transmit SDK</span>
+          <span class="stag">Jenkins</span>
+          <span class="stag">Fastlane</span>
+          <span class="stag">CI/CD</span>
+          <span class="stag">MVVM</span>
+          <span class="stag">PostgreSQL</span>
+          <span class="stag">MongoDB</span>
+          <span class="stag">Redis</span>
+          <span class="stag">TypeScript</span>
+        </div>
+      </div>
+
+      <!-- Role 2 -->
+      <div class="titem">
+        <div class="tdot"></div>
+        <div class="exp-role">Software Engineer, Android Developer</div>
+        <div class="exp-co">Virtusa Corporation &nbsp;·&nbsp; PNC Bank</div>
+        <div class="exp-meta">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Aug 2021 – Sep 2024 &nbsp;·&nbsp; Pittsburgh
+        </div>
+        <ul class="exp-list">
+          <li>Designed and shipped features in the PNC Android Banking app, ensuring stability for <strong>over 5 million active users</strong>.</li>
+          <li>Built reusable UI components integrated from UI to API, significantly improving code quality and developer velocity.</li>
+          <li>Refactored and replaced multiple APIs across the app, optimizing performance for high-demand banking features.</li>
+          <li>Implemented TalkBack support and accessibility compliance — improving usability for users with disabilities.</li>
+          <li>Improved authentication and profile management flows, <strong>reducing account-related issues by 15%</strong>.</li>
+          <li>Contributed to the shared UI component library as part of the app-wide redesign initiative.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="stag">Java</span>
+          <span class="stag">Kotlin</span>
+          <span class="stag">MVVM</span>
+          <span class="stag">RxJava</span>
+          <span class="stag">Coroutines</span>
+          <span class="stag">RESTful APIs</span>
+          <span class="stag">JUnit</span>
+          <span class="stag">Mockito</span>
+          <span class="stag">Hilt</span>
+          <span class="stag">Dagger</span>
+          <span class="stag">Git</span>
+        </div>
+      </div>
+
+      <!-- Role 3 -->
+      <div class="titem">
+        <div class="tdot"></div>
+        <div class="exp-role">Undergraduate Researcher</div>
+        <div class="exp-co">Amrita Vishwa Vidyapeetham</div>
+        <div class="exp-meta">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Jan 2018 – May 2019 &nbsp;·&nbsp; India
+        </div>
+        <ul class="exp-list">
+          <li>Built an ML application predicting breast cancer malignancy across 30 criteria, achieving <strong>92% accuracy</strong> with only 2% false negatives.</li>
+          <li>Applied Naive Bayes, K-Nearest Neighbors, K-Means, and SVM algorithms to model clinical data.</li>
+          <li>Built a full-stack web application in Django to visualize and display graphical analytical results.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="stag">Python</span>
+          <span class="stag">Scikit-learn</span>
+          <span class="stag">Django</span>
+          <span class="stag">Pandas</span>
+          <span class="stag">NumPy</span>
+          <span class="stag">SciPy</span>
+          <span class="stag">MATLAB</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2>Tech I work with</h2>
+    <p class="section-sub">My technical toolkit across languages, frameworks, tools, and platforms.</p>
+
+    <div class="skills-grid">
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Languages
+        </div>
+        <div class="stags">
+          <span class="sk">Java</span><span class="sk">Kotlin</span><span class="sk">Python</span>
+          <span class="sk">JavaScript</span><span class="sk">TypeScript</span><span class="sk">React</span>
+        </div>
+      </div>
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Mobile &amp; Frontend
+        </div>
+        <div class="stags">
+          <span class="sk">Android SDK</span><span class="sk">Jetpack Compose</span>
+          <span class="sk">HTML5</span><span class="sk">CSS3</span>
+        </div>
+      </div>
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+          Backend
+        </div>
+        <div class="stags">
+          <span class="sk">Flask</span><span class="sk">Django</span><span class="sk">Spring Boot</span>
+          <span class="sk">Express.js</span><span class="sk">Ruby on Rails</span>
+        </div>
+      </div>
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Databases
+        </div>
+        <div class="stags">
+          <span class="sk">MySQL</span><span class="sk">PostgreSQL</span><span class="sk">MongoDB</span>
+          <span class="sk">Redis</span><span class="sk">Cassandra</span>
+        </div>
+      </div>
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          DevOps &amp; Cloud
+        </div>
+        <div class="stags">
+          <span class="sk">Docker</span><span class="sk">Kubernetes</span><span class="sk">Terraform</span>
+          <span class="sk">Jenkins</span><span class="sk">Fastlane</span><span class="sk">AWS</span>
+          <span class="sk">OpenShift</span><span class="sk">Firebase</span><span class="sk">Git</span><span class="sk">Maven</span>
+        </div>
+      </div>
+      <div class="scat">
+        <div class="scat-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Patterns &amp; Observability
+        </div>
+        <div class="stags">
+          <span class="sk">MVVM</span><span class="sk">MVP</span><span class="sk">MVC</span>
+          <span class="sk">CI/CD</span><span class="sk">LogScale</span><span class="sk">Splunk</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Disclaimer Modal End -->
+</section>
 
-<!-- JavaScript --> 
-<script src="vendor/jquery/jquery.min.js"></script> 
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
-<!-- Easing --> 
-<script src="vendor/jquery.easing/jquery.easing.min.js"></script> 
-<!-- Appear --> 
-<script src="vendor/jquery.appear/jquery.appear.min.js"></script> 
-<!-- Counter --> 
-<script src="vendor/jquery.countTo/jquery.countTo.min.js"></script> 
-<!-- Parallax Bg --> 
-<script src="vendor/parallaxie/parallaxie.min.js"></script> 
-<!-- Typed --> 
-<script src="vendor/typed/typed.min.js"></script> 
-<!-- Owl Carousel --> 
-<script src="vendor/owl.carousel/owl.carousel.min.js"></script> 
-<!-- isotope Portfolio Filter --> 
-<script src="vendor/isotope/isotope.pkgd.min.js"></script> 
-<!-- Magnific Popup --> 
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script> 
-<!-- Custom Script --> 
-<script src="js/theme.js"></script>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2>Things I've built</h2>
+    <p class="section-sub">Selected projects spanning IoT, machine learning, and full-stack development.</p>
+
+    <div class="proj-grid">
+      <div class="pcard">
+        <div class="pcard-head">
+          <div class="pcard-icon">🍽️</div>
+          <a href="https://tinyurl.com/yvzvnvn5" target="_blank" class="pcard-link" title="View Project">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <div class="pcard-title">IoT-enabled Smart Dining Environment</div>
+        <div class="pcard-lab">Cisco thingQbator Lab</div>
+        <p class="pcard-desc">
+          A smart dining device with 4 sensors and an Android tablet on a fixed-axis 360° motorized base,
+          rotating to face users based on touch input. Includes an Android app for ordering, tic-tac-toe,
+          and payments — plus a full-stack Django web app for restaurant management.
+        </p>
+        <div class="ptags">
+          <span class="ptag">Java</span><span class="ptag">Kotlin</span><span class="ptag">JavaScript</span>
+          <span class="ptag">Django</span><span class="ptag">Firebase</span><span class="ptag">IoT</span><span class="ptag">HTML5/CSS3</span>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="pcard-head">
+          <div class="pcard-icon">📡</div>
+          <a href="http://bit.ly/github_ProxMarketing" target="_blank" class="pcard-link" title="View Project">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <div class="pcard-title">Proximity Marketing</div>
+        <div class="pcard-lab">Cisco thingQbator Lab</div>
+        <p class="pcard-desc">
+          A product recommender system using RFM analysis and K-Means clustering to model behavioral
+          purchase patterns, <strong>increasing click-through rate by 15%</strong>. Paired with an
+          Android app using Estimote Proximity SDK for IoT beacon interaction and a React.js frontend.
+        </p>
+        <div class="ptags">
+          <span class="ptag">Python</span><span class="ptag">Flask</span><span class="ptag">React.js</span>
+          <span class="ptag">scikit-learn</span><span class="ptag">Pandas</span><span class="ptag">Cassandra</span><span class="ptag">K-Means</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2>Academic background</h2>
+    <p class="section-sub">The foundation for everything I build.</p>
+
+    <div class="edu-list">
+      <div class="ecard">
+        <div>
+          <div class="edu-deg">Master of Science in Computer Science</div>
+          <div class="edu-school">University at Buffalo, SUNY</div>
+          <div class="edu-loc">Buffalo, New York</div>
+        </div>
+        <div class="edu-yr">May 2021</div>
+      </div>
+      <div class="ecard" style="transition-delay:0.1s">
+        <div>
+          <div class="edu-deg">Bachelor of Technology in Computer Science &amp; Engineering</div>
+          <div class="edu-school">Amrita Vishwa Vidyapeetham</div>
+          <div class="edu-loc">India</div>
+        </div>
+        <div class="edu-yr">May 2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVOLVEMENT -->
+<section id="involvement">
+  <div class="container">
+    <div class="section-label">Community</div>
+    <h2>Beyond code</h2>
+    <p class="section-sub">Committed to supporting women in technology.</p>
+
+    <div class="inv-card fade-up">
+      <div class="inv-ico">🎤</div>
+      <div>
+        <div class="inv-title">Grace Hopper Celebration 2021 &amp; 2025</div>
+        <div class="inv-sub">AnitaB.org · Member since March 2021</div>
+        <div class="inv-desc">
+          Participated in the Virtual Grace Hopper Celebration of Women in Computing in 2021 and
+          attended in person at GHC 2025 as a professional. A proud member of AnitaB.org since
+          March 2021, committed to diversity and inclusion in tech.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2>Let's connect</h2>
+    <div class="contact-wrap">
+      <div class="cinfo">
+        <a href="mailto:revathyn1998@gmail.com" class="citem">
+          <div class="cico">✉️</div>
+          <div>
+            <div class="clabel">Email</div>
+            <div class="cval">revathyn1998@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:7162186142" class="citem">
+          <div class="cico">📞</div>
+          <div>
+            <div class="clabel">Phone</div>
+            <div class="cval">(716) 218-6142</div>
+          </div>
+        </a>
+        <div class="citem" style="cursor:default; pointer-events:none;">
+          <div class="cico">📍</div>
+          <div>
+            <div class="clabel">Location</div>
+            <div class="cval">Harrison, New Jersey, US</div>
+          </div>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/revathynarayanan/" target="_blank" class="slink">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/revathynarayanan98" target="_blank" class="slink">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.instagram.com/revathy.nn/" target="_blank" class="slink">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+      <div class="ccta fade-up" style="transition-delay:0.1s">
+        <p>
+          Whether it's about a new role, a collaboration, or just a conversation about Android
+          engineering and mobile security — I'd love to hear from you. My inbox is always open.
+        </p>
+        <a href="mailto:revathyn1998@gmail.com" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send a Message
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Designed &amp; built by Revathy Narayanan · 2026</span>
+  <div style="display:flex;gap:1.25rem;">
+    <a href="https://www.linkedin.com/in/revathynarayanan/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/revathynarayanan98" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer for reveal animations
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.titem, .scat, .pcard, .ecard, .fade-up').forEach((el, i) => {
+    io.observe(el);
+  });
+
+  // Stagger delays for skill categories and timeline
+  document.querySelectorAll('.scat').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.07}s`;
+  });
+  document.querySelectorAll('.titem').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.boxShadow =
+      window.scrollY > 40 ? '0 4px 40px rgba(0,0,0,0.6)' : 'none';
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '60px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(9,9,15,0.97)';
+      links.style.padding = '1.25rem 1.5rem 1.5rem';
+      links.style.borderBottom = '1px solid rgba(255,255,255,0.07)';
+      links.style.gap = '1rem';
+    }
+  }
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = 'none';
+    });
+  });
+</script>
 </body>
 </html>
